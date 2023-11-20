@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8, 3.9, "3.10", "3.11"]  # latest release minus two
+        python-version: [ 3.8, 3.9, "3.10", "3.11", "3.12"]  # latest release minus two
         requirements-file: [
             dj32_cms38.txt,
             dj32_cms39.txt,
@@ -39,6 +39,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Generate Report
       run: |
+        pip install setuptools
         pip install -r tests/requirements/${{ matrix.requirements-file }}
         coverage run setup.py test
     - name: Upload Coverage to Codecov
